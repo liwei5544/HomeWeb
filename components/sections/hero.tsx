@@ -2,13 +2,15 @@
 
 import { motion } from "framer-motion";
 import { ParticlesCanvas } from "@/components/particles-canvas";
+import { MechaHorseImage } from "@/components/mecha-horse-image";
 import { Reveal } from "@/components/reveal";
 
 export function Hero() {
   return (
     <section className="relative min-h-[100svh] overflow-hidden pt-20">
       <div className="absolute inset-0 bg-hero-grid" aria-hidden="true" />
-      <ParticlesCanvas className="absolute inset-0 opacity-70" />
+      <MechaHorseImage className="z-[40] opacity-90" />
+      <ParticlesCanvas className="absolute inset-0 pointer-events-none opacity-70" />
       <div className="noise" aria-hidden="true" />
 
       <div className="relative mx-auto flex min-h-[calc(100svh-5rem)] max-w-6xl flex-col justify-center px-4">

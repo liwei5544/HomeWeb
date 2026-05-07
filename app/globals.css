@@ -53,3 +53,219 @@ body {
   );
 }
 
+@keyframes horse-run-x {
+  0% {
+    transform: translate3d(-105vw, 0, 0);
+  }
+  100% {
+    transform: translate3d(75vw, 0, 0);
+  }
+}
+
+@keyframes horse-run-bob {
+  0% {
+    transform: translate3d(0, 0, 0) rotate(-10deg);
+  }
+  20% {
+    transform: translate3d(0, -14px, 0) rotate(-12.8deg);
+  }
+  40% {
+    transform: translate3d(0, 3px, 0) rotate(-8.3deg);
+  }
+  60% {
+    transform: translate3d(0, -17px, 0) rotate(-13.6deg);
+  }
+  80% {
+    transform: translate3d(0, 2px, 0) rotate(-8.6deg);
+  }
+  100% {
+    transform: translate3d(0, 0, 0) rotate(-10deg);
+  }
+}
+
+@keyframes horse-shine {
+  0% {
+    background-position-x: -40%;
+  }
+  100% {
+    background-position-x: 180%;
+  }
+}
+
+@keyframes horse-streak {
+  0% {
+    background-position-y: 0%;
+  }
+  100% {
+    background-position-y: 120%;
+  }
+}
+
+.horse-runner {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.horse-video-only {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  overflow: hidden;
+}
+
+.horse-video-only .horse-video {
+  position: absolute;
+  right: 0;
+  top: min(18svh, 140px);
+  height: 520px;
+  width: 382px;
+  object-fit: contain;
+  opacity: 0.92;
+  /* 与背景融合：边缘渐隐 + 轻微发光氛围 */
+  -webkit-mask-image: radial-gradient(
+    78% 68% at 55% 52%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 62%,
+    rgba(0, 0, 0, 0) 92%
+  );
+  mask-image: radial-gradient(
+    78% 68% at 55% 52%,
+    rgba(0, 0, 0, 1) 0%,
+    rgba(0, 0, 0, 1) 62%,
+    rgba(0, 0, 0, 0) 92%
+  );
+}
+
+/* Canvas 抠像后的小幅增强 */
+.horse-video-only .horse-video canvas {
+  /* 把马“融进”背景光：稍微提亮、降一点对比，边缘更自然 */
+  mix-blend-mode: lighten;
+  /* 柔一点的边缘，减少抠像硬边感 */
+  filter: contrast(1.03) saturate(1.05) brightness(1.02) blur(0.2px);
+}
+
+.horse-runner__streakA {
+  position: absolute;
+  inset: 0;
+  opacity: 0.45;
+  background: radial-gradient(
+    1200px 520px at 65% 48%,
+    rgba(0, 217, 255, 0.10),
+    rgba(108, 99, 255, 0.06) 35%,
+    rgba(10, 10, 15, 0) 70%
+  );
+}
+
+.horse-runner__streakB {
+  position: absolute;
+  inset: 0;
+  opacity: 0.30;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0px,
+    rgba(255, 255, 255, 0) 10px,
+    rgba(255, 255, 255, 0.10) 11px,
+    rgba(255, 255, 255, 0) 18px
+  );
+  -webkit-mask-image: radial-gradient(
+    900px 320px at 65% 52%,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0) 70%
+  );
+  mask-image: radial-gradient(
+    900px 320px at 65% 52%,
+    rgba(0, 0, 0, 1),
+    rgba(0, 0, 0, 0) 70%
+  );
+  animation: horse-streak 1.05s linear infinite;
+}
+
+.horse-runner__track {
+  position: absolute;
+  left: 0;
+  top: min(18svh, 140px);
+  transform: translate3d(75vw, 0, 0);
+  animation: horse-run-x 14s linear infinite;
+  will-change: transform;
+}
+
+.horse-runner__body {
+  position: relative;
+  transform-origin: 42% 75%;
+  animation: horse-run-bob 0.64s ease-in-out infinite;
+  will-change: transform;
+}
+
+.horse-runner__stage {
+  position: relative;
+  height: 520px;
+  width: 382px;
+}
+
+.horse-video {
+  position: relative;
+  height: 520px;
+  width: 382px;
+  object-fit: contain;
+  opacity: 0.92;
+  filter: contrast(1.07) saturate(1.10);
+  display: block;
+}
+
+.horse-runner__img {
+  display: none;
+}
+
+
+.horse-runner__shine {
+  position: absolute;
+  inset: 0;
+  mix-blend-mode: screen;
+  background: linear-gradient(
+    120deg,
+    rgba(255, 255, 255, 0) 35%,
+    rgba(255, 255, 255, 0.28) 46%,
+    rgba(0, 217, 255, 0.14) 52%,
+    rgba(255, 255, 255, 0) 64%
+  );
+  background-size: 220% 100%;
+  opacity: 0.55;
+  filter: blur(0.2px);
+  animation: horse-shine 1.12s linear infinite;
+}
+
+.horse-runner__scan {
+  position: absolute;
+  inset: 0;
+  opacity: 0.25;
+  mix-blend-mode: overlay;
+  background: repeating-linear-gradient(
+    0deg,
+    rgba(255, 255, 255, 0) 0px,
+    rgba(255, 255, 255, 0) 4px,
+    rgba(255, 255, 255, 0.10) 5px,
+    rgba(255, 255, 255, 0) 7px
+  );
+}
+
+.horse-runner__shine,
+.horse-runner__scan {
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .horse-runner__track,
+  .horse-runner__body,
+  .horse-frame,
+  .horse-runner__shine,
+  .horse-runner__streakB {
+    animation: none !important;
+  }
+
+  .horse-video {
+    display: none;
+  }
+}
+

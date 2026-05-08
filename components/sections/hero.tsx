@@ -1,19 +1,19 @@
 "use client";
 
 import { motion } from "framer-motion";
+import { PacmanHeroEffect } from "@/components/pacman-hero-effect";
 import { ParticlesCanvas } from "@/components/particles-canvas";
-import { MechaHorseImage } from "@/components/mecha-horse-image";
 import { Reveal } from "@/components/reveal";
 
 export function Hero() {
   return (
     <section className="relative min-h-[100svh] overflow-hidden pt-20">
       <div className="absolute inset-0 bg-hero-grid" aria-hidden="true" />
-      <MechaHorseImage className="z-[40] opacity-90" />
       <ParticlesCanvas className="absolute inset-0 pointer-events-none opacity-70" />
       <div className="noise" aria-hidden="true" />
 
-      <div className="relative mx-auto flex min-h-[calc(100svh-5rem)] max-w-6xl flex-col justify-center px-4">
+      <div className="relative mx-auto grid min-h-[calc(100svh-5rem)] max-w-6xl grid-cols-1 items-center gap-10 px-4 md:grid-cols-[minmax(0,1fr)_minmax(240px,380px)] md:gap-8 lg:gap-12">
+        <div className="min-w-0">
         <Reveal>
           <p className="inline-flex w-fit items-center gap-2 rounded-full bg-white/5 px-4 py-2 text-xs text-muted ring-1 ring-white/10">
             <span className="h-2 w-2 rounded-full bg-accent shadow-[0_0_18px_rgba(0,217,255,0.6)]" />
@@ -68,6 +68,11 @@ export function Hero() {
             </div>
           ))}
         </motion.div>
+        </div>
+
+        <div className="relative hidden min-h-[260px] md:block md:min-h-[300px]">
+          <PacmanHeroEffect className="mx-auto w-full max-w-[380px]" />
+        </div>
       </div>
     </section>
   );
